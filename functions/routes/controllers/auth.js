@@ -1,10 +1,6 @@
 const router = require('express').Router()
 const bodyParser = require('body-parser')
 
-
-
-
-
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({
     extended: false
@@ -20,6 +16,7 @@ router.post('/register', async (req, res) => {
     }
 
 })
+
 router.post('/login', async (req, res) => {
     try {
         let result = await firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
@@ -39,6 +36,7 @@ router.post('/login', async (req, res) => {
     }
 
 })
+
 router.post('/logout', async (req, res) => {
     try {
         let user = await admin.auth().getUserByEmail(req.body.email)
@@ -50,14 +48,5 @@ router.post('/logout', async (req, res) => {
     }
 
 })
-
-//Test route
-router.post('/t', checkAuth, async (req, res) => {
-    res.send('logged!')
-})
-router.get('/user',checkAuth, async (req, res) => {
-    res.send(firebase.auth().currentUser)
-})
-
 
 module.exports = router

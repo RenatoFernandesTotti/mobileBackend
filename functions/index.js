@@ -9,6 +9,7 @@ const firebaseConfig = require('./keys/firebaseConfig.json')
 //app globais
 global.admin = require('firebase-admin');
 global.firebase = require('firebase')
+global.upTime=new Date
 
 //funcoes globais
 global.checkAuth = async (req, res, next) => {
@@ -16,7 +17,7 @@ global.checkAuth = async (req, res, next) => {
         console.log(req.headers.authorization.split(" ")[1]);
         
         let tok = await admin.auth().verifyIdToken(req.headers.authorization.split(" ")[1], true)
-        next()
+        return next()
     } catch (error) {
         res.status(401).send(error)
     }
