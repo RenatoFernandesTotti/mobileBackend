@@ -2,9 +2,17 @@
 const functions = require('firebase-functions');
 const exp = require('express')
 const app = exp()
+var cors = require('cors')
 //chaves de acesso
+
+var corsOptions = {
+    origin: '*',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  }
 const serviceAccount = require("./keys/revendoo-mobile-firebase-adminsdk-wdsqf-e77d237d15.json");
 const firebaseConfig = require('./keys/firebaseConfig.json')
+
+app.use(cors(corsOptions))
 
 //app globais
 global.admin = require('firebase-admin');

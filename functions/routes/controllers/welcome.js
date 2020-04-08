@@ -1,7 +1,7 @@
 const router = require('express').Router()
 
 router.get('/hello',(req,res)=>{
-    try {
+    try {  
         let message={
             message:"Server up and running! Walcome to the PA server",
             dateNow:new Date,
