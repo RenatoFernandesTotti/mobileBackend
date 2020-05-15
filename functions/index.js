@@ -9,7 +9,7 @@ var corsOptions = {
     origin: '*',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }
-const serviceAccount = require("./keys/revendoo-mobile-firebase-adminsdk-wdsqf-e77d237d15.json");
+const serviceAccount = require("./keys/revendoo-mobile-firebase-adminsdk-wdsqf-93698eb8c7.json");
 const firebaseConfig = require('./keys/firebaseConfig.json')
 
 app.use(cors(corsOptions))
@@ -23,20 +23,12 @@ global.upTime=new Date
 global.checkAuth = async (req, res, next) => {
     try {
         console.log(req.headers.authorization.split(" ")[1]);
-        
         let tok = await admin.auth().verifyIdToken(req.headers.authorization.split(" ")[1], true)
         return next()
     } catch (error) {
         res.status(401).send(error)
     }
 }
-
-
-
-global.checkParam = (params, property, fallbackValue) => {
-    return params.hasOwnProperty(property) ? params[property] : fallbackValue
-}
-
 
 
 

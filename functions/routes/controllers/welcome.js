@@ -14,4 +14,9 @@ router.get('/hello',(req,res)=>{
     }
 })
 
+router.get('/helloAuth',global.checkAuth,(req,res)=>{
+    console.log("hallo")
+    res.send("OK")
+})
+
 module.exports = router
