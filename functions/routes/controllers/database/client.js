@@ -2,7 +2,7 @@ const router = require('express').Router()
 const db = admin.firestore()
 const { getVendorID } = require('../../../lib/vendor')
 
-
+//Criação de um novo cliente
 router.post('/newClient', async (req, res) => {
     try {
         let info = req.body
@@ -27,6 +27,8 @@ router.post('/newClient', async (req, res) => {
     }
 })
 
+
+//retorna todos os clientes para um vendedor
 router.get('/allClients', async (req, res) => {
     let query = await db.collection('vendors').doc(req.query.uid).collection("clients").get()
     let clients = []

@@ -1,5 +1,10 @@
 const router = require('express').Router()
 const db = admin.firestore()
+
+//cria uma nova venda para um vendedor, quando criada é salva como um sub
+//documento de vendas, os produtos originais serao atualizados para que todas as
+//alteracoes sejam consistentes para alteracao de estoque, como varias
+//alteracoes sao feitas dentro desta rota tudo é feito por meio de um batch
 router.post('/newSale', async (req, res) => {
     try {
 
@@ -38,7 +43,7 @@ router.post('/newSale', async (req, res) => {
             prodUp[name].data.qnty -= products[key].qnty
         }
         console.log(prodUp);
-        //     
+
         for (const key in prodUp) {
             if (prodUp.hasOwnProperty(key)) {
                 const prod = prodUp[key];
@@ -60,6 +65,9 @@ router.post('/newSale', async (req, res) => {
 
 })
 
+//Recupera todas as vendas feitas por um vendedor, como as vendas contem
+//subdocumentos e a pesquisa do firestore é rasa outra operacao de get tem de
+//ser feita para a recuperacao total dos dados
 router.get("/getSales", async (req, res) => {
     try {
         let info = req.query

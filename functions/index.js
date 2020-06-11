@@ -3,12 +3,16 @@ const functions = require('firebase-functions');
 const exp = require('express')
 const app = exp()
 var cors = require('cors')
-//chaves de acesso
 
+
+//Setup para o cors
 var corsOptions = {
     origin: '*',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-  }
+}
+
+
+//chaves de acesso
 const serviceAccount = require("./keys/revendoo-mobile-firebase-adminsdk-wdsqf-93698eb8c7.json");
 const firebaseConfig = require('./keys/firebaseConfig.json')
 
@@ -31,7 +35,7 @@ global.checkAuth = async (req, res, next) => {
 }
 
 
-
+//Inicializar firebase e firebase-admin
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://revendoo-mobile.firebaseio.com"

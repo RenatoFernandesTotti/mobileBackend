@@ -6,7 +6,8 @@ router.use(bodyParser.urlencoded({
     extended: false
 }));
 
-
+//Registro de uma conta com senha e email, assim que uma conta nova é criada
+//automaticamente o servido ja a marca como logada
 router.post('/register', async (req, res) => {
     try {
         let info =req.body
@@ -51,6 +52,7 @@ router.post('/register', async (req, res) => {
 
 })
 
+//login de uma conta por meio de email e senha
 router.post('/login', async (req, res) => {
     try {
         let result = await firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
@@ -71,6 +73,7 @@ router.post('/login', async (req, res) => {
 
 })
 
+//Para o logou os token sao invalidados conforma requisitado
 router.post('/logout', async (req, res) => {
     try {
         let user = await admin.auth().getUserByEmail(req.body.email)

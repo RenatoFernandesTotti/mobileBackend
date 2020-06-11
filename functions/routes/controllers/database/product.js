@@ -2,7 +2,7 @@ const router = require('express').Router()
 const db = admin.firestore()
 const { getVendorID } = require('../../../lib/vendor')
 
-
+//Cria um novo produto
 router.post('/newProduct', async (req, res) => {
     try {
         let info = req.body
@@ -22,6 +22,8 @@ router.post('/newProduct', async (req, res) => {
     }
 })
 
+//retorna um produto para um vendedor, caso nenhum nome seja passado volta todos
+//os produtos de um vendedor
 router.get('/getProduct', async (req, res) => {
     try {
         let info = req.body
@@ -50,6 +52,7 @@ router.get('/getProduct', async (req, res) => {
     }
 })
 
+//altera um produto buscando-o pelo seu nome
 router.put('/alterProduct', async (req, res) => {
     try {
 
@@ -69,6 +72,7 @@ router.put('/alterProduct', async (req, res) => {
     }
 })
 
+//deleta um produto
 router.delete('/deleteProduct', async (req, res) => {
     try {
 
