@@ -26,7 +26,7 @@ router.post('/newProduct', async (req, res) => {
 //os produtos de um vendedor
 router.get('/getProduct', async (req, res) => {
     try {
-        let info = req.body
+        let info = req.query
         let query
         let products = []
         if (info.prodctName === undefined) {
@@ -37,7 +37,7 @@ router.get('/getProduct', async (req, res) => {
         
         if (query.empty) {
             console.log('No matching documents.');
-            throw "query empty"
+            throw new Error("query empty")
         }
 
         query.forEach(element => {

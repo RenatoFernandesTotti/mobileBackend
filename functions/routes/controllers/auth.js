@@ -16,13 +16,10 @@ router.post('/register', async (req, res) => {
         let result = await firebase.auth().createUserWithEmailAndPassword(info.email, info.password)
         result = JSON.stringify(result)
         result = JSON.parse(result)
-
-        
-        db.collection("vendors").doc(result.user.uid).set({
+        let data={
             "name": info.name,
             "email": info.email,
             "phoneNumber": info.phoneNumber,
-            "dateBirth": info.dateBirth,
             "CNPJ": info.cnpj,
             "CPF": info.cpf,
             "address": {
@@ -34,7 +31,13 @@ router.post('/register', async (req, res) => {
             },
             "products":{},
             "clients":{}
-        })
+        }
+
+        if(info.dateBirth!==undefined){
+            data.dateBirth=info.dateBirth
+        }
+        
+        db.collection("vendors").doc(result.user.uid).set(data)
         
         res.status(200).send({
             "uid": result.user.uid,
